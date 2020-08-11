@@ -1,6 +1,6 @@
 #!/bin/bash
-cd ./
+cd /home/knight/study/github/
 time=$(date "+%Y%m%d-%H%M%S")
-git add .
+git add *
 git commit -m "study times ${time}"
 git push -u origin master
