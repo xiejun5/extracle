@@ -86,7 +86,7 @@ template<typename T, ARGS...>
 class Cnt<T(ARGS...)> {
 public :
     Cnt(function<T(ARGS...)> g) : g(g), __n(0){}
-    int operator()(ARGS...args) {
+    T operator()(ARGS...args) {
         __n += 1;
         return g(args);
     }

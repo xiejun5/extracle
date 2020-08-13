@@ -28,5 +28,10 @@ int main() {
     A *a = &b;
     cout << a << endl;
 
+    int s = 2;
+    cout << &s << endl;
+    int &t = s;
+    cout << t << endl;
+
     return 0;
 }

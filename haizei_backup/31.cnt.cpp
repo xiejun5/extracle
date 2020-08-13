@@ -10,23 +10,49 @@
 using namespace std;
 
 
-class cnt {
-public : 
-    cnt() : n(0) {}
-    void operaor()(function<int(int, int)> s) {
-        cout << s(3, 5) << endl;
-        n += 1;
+template<typename RT, typename ...ARGS> class FunctionCnt;
+template<typename RT, typename ...ARGS> 
+class FunctionCnt<RT(ARGS...)> {
+public :
+    FunctionCnt(function<RT(ARGS...)> g) : g(g), cnt(0) {}
+    RT operator()(ARGS... args) {
+        cnt += 1;
+        return g(args...);
+    }
+    int get_cnt() {
+        return cnt;
     }
 private :
-    int n;
+    int cnt;
+    function<RT(ARGS...)> g;
 };
 
 int add(int a, int b) {
     return a + b;
 }
+
+
+class A {
+public :
+    int  operator()(int a, int b) {
+        return a + b;
+    }
+};
 int main() {
-    cnt c;
-    c(2, 3);
+    FunctionCnt <int(int, int)>c(add);
+    c(2, 4);
+    c(4, 5);
+    cout << c.get_cnt() << endl;
+    FunctionCnt <double(double, double)> s(add);
+    s(3.4, 2.5);
+    cout << s.get_cnt() << endl; 
+    A k;
+    FunctionCnt <int(int, int)>b(k); 
+    b(4, 5);
+    b(2, 6);
+    cout << b.get_cnt() << endl;
+    
+
 
     return 0;
 }
