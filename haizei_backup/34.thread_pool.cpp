@@ -59,9 +59,6 @@ public :
             delete threads;
         }
     }
-    ~ThreadPool() {
-        
-    }
 
 private :
     bool is_running;
